@@ -204,18 +204,24 @@ function DriverCard(props) {
 class LikeButton extends React.Component {
   constructor(props){
     super(props);
+    this.click = this.click.bind(this);
     this.state = {
-      likes: 0,
-      handleClick: function(e){
-        this.setState({likes: this.likes++});
-        console.log(this.likes)
-      }
-    }
+      likes: 0
+    };
   }
+  
+  click(e) {
+    this.setState((oldState, props) => {
+      return {
+        likes: oldState.likes + 1
+      }
+    });
+  }
+
   render(){
   return (
-    <button onClick={this.handleClick}>
-      {this.likes} Likes
+    <button onClick={this.click}>
+      {this.state.likes} Likes
     </button>
   )
   }
